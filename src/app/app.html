@@ -32,7 +32,7 @@
     @if (!apiOnline()) {
       <div class="connection-banner">
         <span>!</span>
-        <div><strong>No pudimos conectar con la API</strong><small>Iniciá el servicio en localhost:3000 para ver tus datos.</small></div>
+        <div><strong>No pudimos conectar con la API</strong><small>Verificá la disponibilidad del servicio o su configuración CORS.</small></div>
         <button (click)="loadReports()">Reintentar</button>
       </div>
     }

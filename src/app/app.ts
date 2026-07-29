@@ -53,7 +53,7 @@ interface MetricField {
 })
 export class App implements OnInit {
   private readonly http = inject(HttpClient);
-  private readonly api = '/api';
+  private readonly api = 'https://condoback-seven.vercel.app/api';
 
   readonly view = signal<View>('dashboard');
   readonly reports = signal<Report[]>([]);

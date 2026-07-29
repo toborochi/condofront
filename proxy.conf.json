@@ -1,8 +1,0 @@
-{
-  "/api": {
-    "target": "https://condoback-seven.vercel.app",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "info"
-  }
-}
