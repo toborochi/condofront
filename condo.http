@@ -1,0 +1,99 @@
+@baseUrl = http://localhost:3000/api
+
+### Health check
+GET {{baseUrl}}
+
+### Create condominium
+# @name createCondominium
+POST {{baseUrl}}/condominiums
+Content-Type: application/json
+
+{
+  "name": "Condominio Parque Sur",
+  "address": "Av. Central 1234, Montevideo",
+  "units": 80,
+  "administratorName": "Ana Pérez",
+  "contactEmail": "administracion@parquesur.test"
+}
+
+### Register observable metrics and create the calculated report
+# @name createReport
+POST {{baseUrl}}/condominiums/{{createCondominium.response.body.$._id}}/reports
+Content-Type: application/json
+
+{
+  "evaluationDate": "2026-07-28",
+  "evaluator": "Equipo auditor",
+  "metrics": {
+    "governance": {
+      "signedAndArchivedMinutesPercent": 90,
+      "regulationAgeYears": 3,
+      "undeclaredConflictsCount": 0,
+      "legalNoticeCompliancePercent": 100
+    },
+    "finances": {
+      "reserveFundingPercent": 70,
+      "delinquencyRatePercent": 8,
+      "budgetDeviationPercent": 5,
+      "hasFinancialStatementsUnder90Days": true
+    },
+    "infrastructure": {
+      "facilityConditionIndexPercent": 12,
+      "preventiveMaintenanceCoveragePercent": 85,
+      "criticalSystemsWeightedAgeYears": 7,
+      "emergencyIncidentsLast12Months": 2
+    },
+    "operations": {
+      "securityStaffCoveragePercent": 100,
+      "operationalCamerasPercent": 95,
+      "hasWrittenEmergencyProtocol": true,
+      "documentedSecurityChecksPercent": 90
+    },
+    "technology": {
+      "digitizedAdministrativeProcessesPercent": 75,
+      "hasDigitalAndPhysicalCriticalDocumentBackup": true,
+      "hasDigitalCommunicationChannel": true,
+      "lastDocumentBackupAgeDays": 7
+    },
+    "residentExperience": {
+      "generalSatisfaction": 4.2,
+      "averageRequestResponseHours": 12,
+      "claimsResolvedUnder15BusinessDaysPercent": 88,
+      "lastAssemblyParticipationPercent": 65
+    },
+    "sustainability": {
+      "efficientLightingPercent": 80,
+      "hasRecyclingProgram": true,
+      "hasSustainabilityPolicyOrCommittee": false,
+      "universalAccessibilityPercent": 60
+    },
+    "humanTalent": {
+      "formallyEmployedStaffPercent": 100,
+      "contractedCriticalProvidersPercent": 90,
+      "hasPeriodicProviderEvaluation": true,
+      "annualStaffTurnoverPercent": 15
+    },
+    "communication": {
+      "hasWrittenCrisisCommunicationProtocol": true,
+      "escalatedClaimOfficialResponseHours": 18,
+      "formallySupportedCommunicationsPercent": 90,
+      "transparencyPerception": 4
+    },
+    "innovation": {
+      "previousImprovementPlanImplementedPercent": 70,
+      "hasRecentBoardTraining": true,
+      "condoScoreYearOverYearVariation": 4,
+      "adoptedManagementInnovation": true
+    }
+  },
+  "notes": "Evaluación basada en métricas observables."
+}
+
+### Get every report
+GET {{baseUrl}}/reports
+
+### Get reports for this condominium
+GET {{baseUrl}}/reports?condominiumId={{createCondominium.response.body.$._id}}
+
+### Get condominium profile and report summary
+GET {{baseUrl}}/condominiums/{{createCondominium.response.body.$._id}}/profile
